@@ -13,6 +13,7 @@ import {
     saveSettingsDebounced,
     saveChatConditional,
     updateMessageBlock,
+    getRequestHeaders,
 } from '../../../../script.js';
 import { callGenericPopup, POPUP_TYPE } from '../../../popup.js';
 import { createTranslationService, TranslationError } from './lib/translate.js';
@@ -29,6 +30,7 @@ const DEFAULT_SETTINGS = {
     languageOther: '',
     translateReasoning: false,
     showOriginalDuringStream: false,
+    viaSt: true,
 };
 
 const LANGUAGES = [
@@ -53,7 +55,7 @@ extension_settings[EXTENSION_NAME] = extension_settings[EXTENSION_NAME] || {};
 const settings = Object.assign({}, DEFAULT_SETTINGS, extension_settings[EXTENSION_NAME]);
 extension_settings[EXTENSION_NAME] = settings;
 
-const service = createTranslationService(() => settings);
+const service = createTranslationService(() => settings, { getHeaders: () => getRequestHeaders() });
 
 const runtime = {
     viewingOriginal: new Set(), // messageIds whose DOM shows the canonical EN instead of the translation
@@ -409,6 +411,7 @@ function bindSettingsUi() {
     $('#st-translation-layer-language-other').toggleClass('st-tl-hidden', settings.language !== '_other');
     $('#st-translation-layer-reasoning').prop('checked', settings.translateReasoning);
     $('#st-translation-layer-stream').prop('checked', settings.showOriginalDuringStream);
+    $('#st-translation-layer-via-st').prop('checked', settings.viaSt);
     updateWarning();
 
     $('#st-translation-layer-enabled').on('change', function () {
@@ -445,6 +448,10 @@ function bindSettingsUi() {
     });
     $('#st-translation-layer-stream').on('change', function () {
         settings.showOriginalDuringStream = Boolean($(this).prop('checked'));
+        saveSettingsDebounced();
+    });
+    $('#st-translation-layer-via-st').on('change', function () {
+        settings.viaSt = Boolean($(this).prop('checked'));
         saveSettingsDebounced();
     });
 

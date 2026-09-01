@@ -48,6 +48,10 @@
             <div class="st-tl-settings-section">
                 <b>Behavior</b>
                 <div class="st-tl-settings-row">
+                    <input id="st-translation-layer-via-st" type="checkbox" />
+                    <label for="st-translation-layer-via-st" title="Routes translator calls through the SillyTavern server instead of the browser. Required for endpoints that block browser requests (CORS), e.g. NVIDIA NIM. Recommended.">Route via SillyTavern server (fixes CORS)</label>
+                </div>
+                <div class="st-tl-settings-row">
                     <input id="st-translation-layer-reasoning" type="checkbox" />
                     <label for="st-translation-layer-reasoning" title="Costs extra translator tokens per message">Translate reasoning blocks</label>
                 </div>
