@@ -1,0 +1,61 @@
+<div class="extension_block">
+    <div class="inline-drawer">
+        <div class="inline-drawer-toggle inline-drawer-header">
+            <b>Translation Layer</b>
+            <div class="inline-drawer-icon fa-solid fa-circle-chevron-down down"></div>
+        </div>
+        <div class="inline-drawer-content">
+            <div class="st-tl-settings-row">
+                <input id="st-translation-layer-enabled" type="checkbox" />
+                <label for="st-translation-layer-enabled" title="Master toggle — when off, nothing is intercepted (vanilla ST)">Enabled</label>
+            </div>
+            <small class="st-tl-warning" id="st-translation-layer-warning"></small>
+
+            <div class="st-tl-settings-section">
+                <b>Translator (OpenAI-compatible)</b>
+                <div class="st-tl-settings-row">
+                    <input id="st-translation-layer-base-url" class="text_pole textarea_compact" type="text"
+                        placeholder="Base URL — https://api.openai.com/v1 · http://localhost:11434/v1" autocomplete="off" />
+                </div>
+                <div class="st-tl-settings-row">
+                    <input id="st-translation-layer-api-key" class="text_pole textarea_compact" type="password"
+                        placeholder="API key (empty for local endpoints)" autocomplete="off" />
+                </div>
+                <div class="st-tl-settings-row">
+                    <input id="st-translation-layer-model" class="text_pole textarea_compact" type="text"
+                        placeholder="Model — gemini-2.5-flash · gpt-4o-mini · qwen2.5:7b" autocomplete="off" />
+                </div>
+                <div class="st-tl-settings-row">
+                    <div id="st-translation-layer-test" class="menu_button menu_button_icon"
+                        title="Send a tiny translation request to validate the settings">
+                        <i class="fa-solid fa-plug-circle-check"></i>
+                        <span>Test connection</span>
+                    </div>
+                    <span id="st-translation-layer-test-result" class="st-tl-test-result"></span>
+                </div>
+            </div>
+
+            <div class="st-tl-settings-section">
+                <b>User language</b>
+                <div class="st-tl-settings-row">
+                    <select id="st-translation-layer-language" class="text_pole"></select>
+                    <input id="st-translation-layer-language-other" class="text_pole textarea_compact st-tl-hidden"
+                        type="text" placeholder="Your language, e.g. català" autocomplete="off" />
+                </div>
+                <small>The language you read and write in. Never taken from the ST UI language.</small>
+            </div>
+
+            <div class="st-tl-settings-section">
+                <b>Behavior</b>
+                <div class="st-tl-settings-row">
+                    <input id="st-translation-layer-reasoning" type="checkbox" />
+                    <label for="st-translation-layer-reasoning" title="Costs extra translator tokens per message">Translate reasoning blocks</label>
+                </div>
+                <div class="st-tl-settings-row">
+                    <input id="st-translation-layer-stream" type="checkbox" />
+                    <label for="st-translation-layer-stream" title="Useful for debugging — otherwise a placeholder is shown until the translation is ready">Show original (EN) while streaming</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
